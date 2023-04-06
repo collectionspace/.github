@@ -1,0 +1,11 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  check:
+    uses: collectionspace/.github/workflows/check-js.yml@main

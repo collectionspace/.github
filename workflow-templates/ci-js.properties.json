@@ -1,0 +1,11 @@
+{
+  "name": "Continuous Integration for JavaScript",
+  "description": "Continuous integration starter workflow for CollectionSpace JavaScript projects.",
+  "iconName": "octicon gear",
+  "categories": [
+      "JavaScript"
+  ],
+  "filePatterns": [
+      "package.json$"
+  ]
+}
