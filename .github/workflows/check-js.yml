@@ -6,7 +6,7 @@ on:
 jobs:
   lint_test:
     name: Lint and test
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout
