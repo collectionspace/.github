@@ -42,8 +42,14 @@ jobs:
       - name: Generate coverage report
         run: npm run coverage
 
+      - name: Check for codecov token
+        env:
+          TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: "${{ env.TOKEN != '' }}"
+        run: echo "CODECOV_TOKEN_EXISTS=true" >> "$GITHUB_ENV"
+        
       - name: Upload coverage report
-        if: ${{ secrets.CODECOV_TOKEN != '' }}
+        if: ${{ env.CODECOV_TOKEN_EXISTS == 'true' }}
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
