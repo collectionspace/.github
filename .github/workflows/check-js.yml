@@ -42,6 +42,11 @@ jobs:
       - name: Generate coverage report
         run: npm run coverage
 
+      - name: Print context
+        env:
+          EVENT_NAME: ${{ context.eventName }}
+        run: echo "eventName=$EVENT_NAME"
+
       - name: Check for codecov token
         env:
           TOKEN: ${{ secrets.CODECOV_TOKEN }}
