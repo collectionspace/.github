@@ -2,9 +2,6 @@ name: Check JavaScript
 
 on:
   workflow_call:
-    secrets:
-      CODECOV_TOKEN:
-        required: false
 
 jobs:
   lint_test:
@@ -42,21 +39,8 @@ jobs:
       - name: Generate coverage report
         run: npm run coverage
 
-      - name: Print context
-        env:
-          EVENT_NAME: ${{ context.eventName }}
-        run: echo "eventName=$EVENT_NAME"
-
-      - name: Check for codecov token
-        env:
-          TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        if: "${{ env.TOKEN != '' }}"
-        run: echo "CODECOV_TOKEN_EXISTS=true" >> "$GITHUB_ENV"
-
-      - name: Upload coverage report
-        if: ${{ github.event_name == 'pull_request' || env.CODECOV_TOKEN_EXISTS == 'true' }}
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage report artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: coverage/lcov.info
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
+          name: coverage
+          path: coverage
