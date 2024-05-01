@@ -49,7 +49,7 @@ jobs:
         run: echo "CODECOV_TOKEN_EXISTS=true" >> "$GITHUB_ENV"
         
       - name: Upload coverage report
-        if: ${{ env.CODECOV_TOKEN_EXISTS == 'true' }}
+        if: ${{ github.event_name == 'pull_request' || env.CODECOV_TOKEN_EXISTS == 'true' }}
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
