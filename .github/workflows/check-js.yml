@@ -47,11 +47,11 @@ jobs:
           TOKEN: ${{ secrets.CODECOV_TOKEN }}
         if: "${{ env.TOKEN != '' }}"
         run: echo "CODECOV_TOKEN_EXISTS=true" >> "$GITHUB_ENV"
-        
+
       - name: Upload coverage report
         if: ${{ github.event_name == 'pull_request' || env.CODECOV_TOKEN_EXISTS == 'true' }}
         uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           files: coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
